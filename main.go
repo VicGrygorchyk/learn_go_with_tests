@@ -6,11 +6,12 @@ import (
 	"fmt"
 )
 
-var arr = [10]int {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+const PREFIX string = "testing:"
+var arr [10]int = [10]int {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 var slice = arr[:3]
 
 func main() {
-	log.SetPrefix("testing: ")
+	log.SetPrefix(PREFIX)
 	log.SetFlags(0)
 
 	for i := range arr {
