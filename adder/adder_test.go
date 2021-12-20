@@ -22,29 +22,33 @@ func TestAdd(t *testing.T) {
 	})
 }
 
+
+
 func TestAddAll(t *testing.T) {
+
+	checkAddAll := func (t testing.TB, expected []int, got []int) {
+		t.Helper()
+		if !reflect.DeepEqual(expected, got) {
+			t.Errorf("Expected %d, got %d", expected, got)
+		}
+	}
+
 	t.Run("Check AddAll with two param", func (t *testing.T) {
 		res := adder.AddAll([]int{1, 2}, []int{5, 6})
 		expected := []int {3, 11}
-		if !reflect.DeepEqual(res, expected) {
-			t.Errorf("Expected %d, got %d", res, expected)
-		}
+		checkAddAll(t, expected, res)
 	})
 
 	t.Run("Check AddAll with three param", func (t *testing.T) {
 		res := adder.AddAll([]int{1, 2}, []int{5, 6}, []int{2, 2, 2})
 		expected := []int {3, 11, 6}
-		if !reflect.DeepEqual(res, expected) {
-			t.Errorf("Expected %d, got %d", res, expected)
-		}
+		checkAddAll(t, expected, res)
 	})
 
 	t.Run("Check AddAll with big slices", func (t *testing.T) {
 		res := adder.AddAll([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, []int{5, 6}, []int{2, 2, 2, 2, 2, 2, 2, 2, 2, 2})
 		expected := []int {66, 11, 20}
-		if !reflect.DeepEqual(res, expected) {
-			t.Errorf("Expected %d, got %d", res, expected)
-		}
+		checkAddAll(t, expected, res)
 	})
 }
 
