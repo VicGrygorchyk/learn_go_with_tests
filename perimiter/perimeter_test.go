@@ -52,3 +52,26 @@ func TestPerimeter(t *testing.T) {
 
 }
 
+// Table driven tests
+func TestPerimeter2(t *testing.T) {
+
+	assertArea := func(t testing.TB, shape perimeter.Shape, expected float64) {
+		t.Helper()
+		got := shape.Perimeter()
+        if got != expected {
+            t.Errorf("got %g want %g", got, expected)
+        }
+	}
+
+	testsParams := []struct {
+		shape perimeter.Shape
+		want float64
+	} {
+		{shape: perimeter.Rectangle{12, 6}, want: 36.0}, // optional naming
+		{shape: perimeter.Circle{10}, want: 62.800000000000004},
+	}
+
+	for _, test := range testsParams {
+		assertArea(t, test.shape, test.want)
+	}
+}
