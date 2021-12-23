@@ -1,9 +1,8 @@
 package main
 
 import (
-	"os"
-	"github.com/vicgrygorchyk/example_hello/counter"
-	"time"
+	"fmt"
+	"reflect"
 )
 
 const PREFIX string = "testing:"
@@ -61,13 +60,35 @@ var slice = arr[:3]
 // 	}
 // 	fmt.Println(msg)
 // }
-type DefaultSleeper struct {}
+// type DefaultSleeper struct {}
 
-func (d *DefaultSleeper) Sleep() {
-    time.Sleep(1 * time.Second)
-}
+// func (d *DefaultSleeper) Sleep() {
+//     time.Sleep(1 * time.Second)
+// }
+
+// func main() {
+// 	sleeper := DefaultSleeper{}
+// 	counter.Countdown(os.Stdout, &sleeper)
+// }
+
+
+var test int = 5
 
 func main() {
-	sleeper := DefaultSleeper{}
-	counter.Countdown(os.Stdout, &sleeper)
+	val := reflect.ValueOf(test)
+
+	fmt.Println(val)
+
+	type StructX struct {
+		fieldZero int
+		fieldOne string
+	}
+	
+	var example StructX = StructX{3, "test"}
+	
+	valOfStruct := reflect.ValueOf(example)
+	fieldZero := valOfStruct.Field(0)
+	fieldOne := valOfStruct.Field(1)
+	fmt.Println(fieldZero)
+	fmt.Println(fieldOne)
 }
